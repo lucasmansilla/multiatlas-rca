@@ -58,7 +58,7 @@ class MultiAtlasSegmentation(object):
         # Save predicted label
         label_path = os.path.join(
             out_dir, os.path.splitext(
-                os.path.basename(image_path))[0] + '_labels.png')
+                os.path.basename(image_path))[0] + '_mask.png')
         sitk.WriteImage(label, label_path)
 
         if remove_tmp_dir:
