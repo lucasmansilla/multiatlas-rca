@@ -1,6 +1,8 @@
 import SimpleITK as sitk
 import os
 
+from utils import read_landmark_file_elastix
+
 
 def register(fixed_image_path, moving_image_path, moving_label_path,
              parameter_map, elastix_out_dir):
@@ -27,3 +29,44 @@ def register(fixed_image_path, moving_image_path, moving_label_path,
                       sitk.sitkUInt8))
 
     return moving_images[-1], moving_labels[-1]
+
+
+def register_landmark(fixed_image_path, moving_image_path,
+                      fixed_landmark_path, parameter_map, elastix_out_dir):
+    """Image/Landmark Registration using SimpleElastix."""
+
+    fixed_image = sitk.ReadImage(fixed_image_path)
+    moving_image = sitk.ReadImage(moving_image_path)
+
+    elastixImageFilter = sitk.ElastixImageFilter()
+    elastixImageFilter.SetLogToConsole(False)
+    elastixImageFilter.SetLogToFile(False)
+    elastixImageFilter.SetOutputDirectory(elastix_out_dir)
+    elastixImageFilter.SetFixedImage(fixed_image)
+    elastixImageFilter.SetMovingImage(moving_image)
+
+    parameterMapVector = sitk.VectorOfParameterMap()
+    parameterMap = sitk.GetDefaultParameterMap('affine')
+    parameterMap['FinalBSplineInterpolationOrder'] = ['0']
+    parameterMapVector.append(parameterMap)
+    parameterMap = sitk.GetDefaultParameterMap('nonrigid')
+    parameterMap['FinalBSplineInterpolationOrder'] = ['0']
+    parameterMapVector.append(parameterMap)
+    elastixImageFilter.SetParameterMap(parameterMapVector)
+
+    elastixImageFilter.Execute()
+
+    transformixImageFilter = sitk.TransformixImageFilter()
+    transformixImageFilter.SetLogToConsole(False)
+    transformixImageFilter.SetLogToFile(False)
+    transformixImageFilter.SetOutputDirectory(elastix_out_dir)
+    transformParameterMap = elastixImageFilter.GetTransformParameterMap()
+    transformixImageFilter.SetTransformParameterMap(transformParameterMap)
+    transformixImageFilter.SetFixedPointSetFileName(fixed_landmark_path)
+
+    transformixImageFilter.Execute()
+
+    landmark_file_path = os.path.join(elastix_out_dir, 'outputpoints.txt')
+    moving_landmarks = read_landmark_file_elastix(landmark_file_path)
+
+    return moving_landmarks
