@@ -1,8 +1,9 @@
 import SimpleITK as sitk
 import os
 import numpy as np
+
+import utils
 from register import register
-from utils import create_dir
 from binary_metrics import dsc
 
 
@@ -38,7 +39,7 @@ class MultiAtlasSegmentation(object):
 
         # Temporary directory for Elastix results
         tmp_dir = os.path.join(out_dir, 'tmp')
-        create_dir(tmp_dir)
+        utils.create_dir(tmp_dir)
 
         # Step 1: Atlas selection
         idxs = self._atlas_selection(image_path)
@@ -69,13 +70,12 @@ class MultiAtlasSegmentation(object):
     def _atlas_selection(self, image_path):
         """Select an atlas set using an image similarity (or dissimilarity)
         measure."""
-        image = sitk.GetArrayFromImage(sitk.ReadImage(image_path)) / 255.
+        image = utils.load_image_arr(image_path)
 
         scores = []
         for atlas_image in self.atlas_paths['images']:
             scores.append(self.image_metric_func(
-                image, sitk.GetArrayFromImage(
-                    sitk.ReadImage(atlas_image) / 255.)))
+                image, utils.load_image_arr(atlas_image)))
 
         if self.is_similarity_metric:
             # Similarity is higher for more similar images
@@ -99,7 +99,7 @@ class SingleAtlasClassifier(object):
 
         # Temporary directory for Elastix results
         tmp_dir = os.path.join(out_dir, 'tmp')
-        create_dir(tmp_dir)
+        utils.create_dir(tmp_dir)
 
         scores = []
         for atlas_image, atlas_label in zip(atlas_paths['images'],
@@ -107,7 +107,7 @@ class SingleAtlasClassifier(object):
             predicted_label = register(
                 atlas_image, self.image_path, self.label_path,
                 parameter_map, tmp_dir)[1]
-            scores.append(dsc(sitk.ReadImage(atlas_label),
+            scores.append(dsc(utils.load_image_itk(atlas_label),
                               predicted_label, True))
 
         if remove_tmp_dir:

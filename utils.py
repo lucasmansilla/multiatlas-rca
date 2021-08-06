@@ -1,5 +1,6 @@
 import os
 import numpy as np
+import SimpleITK as sitk
 
 
 def read_config_file(filename):
@@ -20,3 +21,14 @@ def read_landmark_file_elastix(path):
     for line in list(data):
         landmarks += [float(item) for item in line[27:29]]
     return np.asarray(landmarks)
+
+
+def load_image_arr(path):
+    image = load_image_itk(path)
+    image = sitk.GetArrayFromImage(image)
+    return image
+
+
+def load_image_itk(path):
+    image = sitk.ReadImage(path, sitk.sitkFloat32)
+    return image

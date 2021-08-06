@@ -1,16 +1,16 @@
 import SimpleITK as sitk
 import os
 
-from utils import read_landmark_file_elastix
+import utils
 
 
 def register(fixed_image_path, moving_image_path, moving_label_path,
              parameter_map, elastix_out_dir):
     """Image/Label Registration using SimpleElastix."""
-    fixed_image = sitk.ReadImage(fixed_image_path)
+    fixed_image = utils.load_image_itk(fixed_image_path)
 
-    moving_images = [sitk.ReadImage(moving_image_path)]
-    moving_labels = [sitk.ReadImage(moving_label_path)]
+    moving_images = [utils.load_image_itk(moving_image_path)]
+    moving_labels = [utils.load_image_itk(moving_label_path)]
 
     for params in parameter_map:
         # Warp moving image
@@ -35,8 +35,8 @@ def register_landmark(fixed_image_path, moving_image_path,
                       fixed_landmark_path, parameter_map, elastix_out_dir):
     """Image/Landmark Registration using SimpleElastix."""
 
-    fixed_image = sitk.ReadImage(fixed_image_path)
-    moving_image = sitk.ReadImage(moving_image_path)
+    fixed_image = utils.load_image_itk(fixed_image_path)
+    moving_image = utils.load_image_itk(moving_image_path)
 
     elastixImageFilter = sitk.ElastixImageFilter()
     elastixImageFilter.SetLogToConsole(False)
@@ -67,6 +67,6 @@ def register_landmark(fixed_image_path, moving_image_path,
     transformixImageFilter.Execute()
 
     landmark_file_path = os.path.join(elastix_out_dir, 'outputpoints.txt')
-    moving_landmarks = read_landmark_file_elastix(landmark_file_path)
+    moving_landmarks = utils.read_landmark_file_elastix(landmark_file_path)
 
     return moving_landmarks
