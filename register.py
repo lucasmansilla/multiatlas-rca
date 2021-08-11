@@ -32,7 +32,7 @@ def register(fixed_image_path, moving_image_path, moving_label_path,
 
 
 def register_landmark(fixed_image_path, moving_image_path,
-                      fixed_landmark_path, parameter_map, elastix_out_dir):
+                      fixed_landmark_path, elastix_out_dir):
     """Image/Landmark Registration using SimpleElastix."""
 
     fixed_image = utils.load_image_itk(fixed_image_path)
