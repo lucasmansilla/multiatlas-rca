@@ -15,7 +15,7 @@ def create_dir(dir_path):
         os.makedirs(dir_path)
 
 
-def read_landmark_file_elastix(path):
+def read_landmarks_itk(path):
     data = np.loadtxt(path, dtype=np.str)
     landmarks = []
     for line in list(data):
@@ -23,12 +23,12 @@ def read_landmark_file_elastix(path):
     return np.asarray(landmarks)
 
 
-def load_image_arr(path):
-    image = load_image_itk(path)
+def read_image_arr(path):
+    image = read_image_itk(path)
     image = sitk.GetArrayFromImage(image)
     return image
 
 
-def load_image_itk(path):
+def read_image_itk(path):
     image = sitk.ReadImage(path, sitk.sitkFloat32)
     return image
