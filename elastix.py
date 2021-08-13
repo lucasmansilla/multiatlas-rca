@@ -5,7 +5,7 @@ import utils
 
 def register(fixed_image_path, moving_image_path, moving_label_path,
              parameter_map_lst, output_dir):
-    """Image registration and segmentation transformation via SimpleElastix."""
+    """ Image registration and segmentation transformation. """
 
     fixed_image = utils.read_image_itk(fixed_image_path)
     moving_image = utils.read_image_itk(moving_image_path)
@@ -52,7 +52,7 @@ def register(fixed_image_path, moving_image_path, moving_label_path,
 
 def register_landmarks(fixed_image_path, moving_image_path,
                        fixed_landmarks_path, output_dir):
-    """Image registration and landmark transformation via SimpleElastix."""
+    """ Image registration and landmark transformation. """
 
     fixed_image = utils.read_image_itk(fixed_image_path)
     moving_image = utils.read_image_itk(moving_image_path)
