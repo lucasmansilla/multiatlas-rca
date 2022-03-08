@@ -56,7 +56,7 @@ if __name__ == "__main__":
 
     num_images = len(test_images_list)
     print('\nPredicting segmentations for input images:\n')
-    for i, image_path in enumerate(test_images_list[:2]):
+    for i, image_path in enumerate(test_images_list):
         image_name = os.path.basename(image_path)
 
         print(f'\t{i+1:>3}/{num_images} File {image_name}', end=' ', flush=True)
