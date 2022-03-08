@@ -13,14 +13,14 @@ The most salient aspects of the project are as follows:
 This project uses Python 3.8.10.
 
 ### Setup:
-1. Create and activate virtual environment: 1) `python3 -m venv env`, 2) `source env/bin/activate`.
-2. Install required packages: `pip install -r requirements.txt`.
-3. Install project modules (src): `pip install -e .`.
+1. Create and activate virtual environment: 1) `python3 -m venv env` 2) `source env/bin/activate`
+2. Install required packages: `pip install -r requirements.txt`
+3. Install project modules (src): `pip install -e .`
 4. Install SimpleElastix toolbox following [this guide](https://gist.github.com/vfmatzkin/0fcc79a61f9bafcc2113fd83a8900937).
 
 ### Simulations:
-- Multi-atlas: `./01_run_multiatlas.sh`.
-- RCA: `./02_run_rca.sh`.
+- Multi-atlas: `./01_run_multiatlas.sh`
+- RCA: `./02_run_rca.sh`
 
 ## Reference
 - Mansilla, L., & Ferrante, E. (2018). Segmentación multi-atlas de imágenes médicas con selección de atlas inteligente y control de calidad automático. In XXIV Congreso Argentino de Ciencias de la Computación (La Plata, 2018).
