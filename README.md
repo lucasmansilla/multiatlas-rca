@@ -12,7 +12,7 @@ The most salient aspects of the project are as follows:
 ## Intructions
 This project uses Python 3.8.10.
 
-### Setup:
+### Project environment:
 1. Create and activate virtual environment: 1) `python3 -m venv env` 2) `source env/bin/activate`
 2. Install required packages: `pip install -r requirements.txt`
 3. Install project modules (src): `pip install -e .`
