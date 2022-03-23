@@ -9,7 +9,7 @@ The most salient aspects of the project are as follows:
 - Two label fusion techniques: Voting and STAPLE.
 - Quality evaluation for predicted segmentations via [RCA](https://arxiv.org/abs/1702.03407).
 
-## Intructions
+## Instructions
 This project uses Python 3.8.10.
 
 ### Project environment:
