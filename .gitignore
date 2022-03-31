@@ -1,5 +1,5 @@
 __pycache__
-__pytest_cache__
+.pytest_cache
 *.egg-info
 data
 env
