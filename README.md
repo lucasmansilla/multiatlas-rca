@@ -1,6 +1,6 @@
 # Image segmentation and accuracy prediction via Multi-atlas segmentation (MAS) and Reverse classification accuracy (RCA)
 
-This repository contains an extended version of the source code corresponding to the paper "Segmentación multi-atlas de imágenes médicas con selección de atlas inteligente y control de calidad automático" (La Plata, 2018). You can check out or paper here: http://sedici.unlp.edu.ar/handle/10915/73180.
+This repository contains an extended version of the source code corresponding to the paper "Segmentación multi-atlas de imágenes médicas con selección de atlas inteligente y control de calidad automático" (La Plata, 2018). You can check out our paper here: http://sedici.unlp.edu.ar/handle/10915/73180.
 
 ## Description
 The most salient aspects of the project are as follows:
