@@ -5,7 +5,7 @@ import skimage.transform as ski
 import SimpleITK as sitk
 
 import src.fusion
-import src.metric
+import src.metric.image
 from src.elastix import register_label
 from src.utils.io import read_image_to_numpy, read_image_to_itk
 
